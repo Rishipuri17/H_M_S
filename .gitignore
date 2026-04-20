@@ -1,0 +1,8 @@
+node_modules
+.venv
+venv
+__pycache__
+.env
+dist
+BraTS2020_training_data
+*.csv

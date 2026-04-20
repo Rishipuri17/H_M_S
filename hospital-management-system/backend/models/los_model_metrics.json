@@ -1,0 +1,530 @@
+{
+  "task": "regression",
+  "target": "Length of Stay (days)",
+  "best_model": "XGBoost (Tuned)",
+  "best_r2": 0.8935,
+  "best_mae": 1.2384566068649292,
+  "best_rmse": 1.5609977366878858,
+  "comparison": [
+    {
+      "model": "Linear Regression",
+      "r2": 0.8570915489544971,
+      "mae": 1.444715349367836,
+      "rmse": 1.8079019178948876,
+      "cv_r2_mean": 0.8517975387841789,
+      "cv_r2_std": 0.006059726412469283
+    },
+    {
+      "model": "Random Forest",
+      "r2": 0.8626604214913794,
+      "mae": 1.3967526127544694,
+      "rmse": 1.7723266364478976,
+      "cv_r2_mean": 0.8562656078020414,
+      "cv_r2_std": 0.0057149068358785995
+    },
+    {
+      "model": "XGBoost",
+      "r2": 0.888170599937439,
+      "mae": 1.2677408456802368,
+      "rmse": 1.5992777833539324,
+      "cv_r2_mean": 0.8853322505950928,
+      "cv_r2_std": 0.0033247058426199103
+    },
+    {
+      "model": "XGBoost (Tuned)",
+      "r2": 0.8934599757194519,
+      "mae": 1.2384566068649292,
+      "rmse": 1.5609977366878858,
+      "cv_r2_mean": 0.8934599757194519,
+      "cv_r2_std": 0.0
+    }
+  ],
+  "feature_importance": [
+    {
+      "feature": "Num Procedures",
+      "importance": 0.6458
+    },
+    {
+      "feature": "Condition Severity",
+      "importance": 0.2301
+    },
+    {
+      "feature": "Admission Type",
+      "importance": 0.0981
+    },
+    {
+      "feature": "Age",
+      "importance": 0.0191
+    },
+    {
+      "feature": "Gender",
+      "importance": 0.0026
+    },
+    {
+      "feature": "Insurance Type",
+      "importance": 0.0021
+    },
+    {
+      "feature": "Num Diagnoses",
+      "importance": 0.0021
+    }
+  ],
+  "dataset_stats": {
+    "age_histogram": {
+      "counts": [
+        549,
+        487,
+        519,
+        489,
+        484,
+        473,
+        488,
+        472,
+        526,
+        513
+      ],
+      "bins": [
+        18.0,
+        25.1,
+        32.2,
+        39.3,
+        46.4,
+        53.5,
+        60.6,
+        67.7,
+        74.8,
+        81.9,
+        89.0
+      ]
+    },
+    "severity_histogram": {
+      "counts": [
+        1035,
+        1031,
+        986,
+        962,
+        986
+      ],
+      "bins": [
+        1.0,
+        1.8,
+        2.6,
+        3.4,
+        4.2,
+        5.0
+      ]
+    },
+    "los_mean": 14.39,
+    "los_std": 4.66,
+    "num_samples": 5000
+  },
+  "actual_vs_predicted": [
+    {
+      "actual": 11,
+      "predicted": 10.2
+    },
+    {
+      "actual": 11,
+      "predicted": 12.7
+    },
+    {
+      "actual": 13,
+      "predicted": 12.6
+    },
+    {
+      "actual": 15,
+      "predicted": 14.6
+    },
+    {
+      "actual": 17,
+      "predicted": 18.2
+    },
+    {
+      "actual": 21,
+      "predicted": 19.9
+    },
+    {
+      "actual": 16,
+      "predicted": 14.4
+    },
+    {
+      "actual": 17,
+      "predicted": 15.5
+    },
+    {
+      "actual": 9,
+      "predicted": 7.4
+    },
+    {
+      "actual": 11,
+      "predicted": 9.7
+    },
+    {
+      "actual": 7,
+      "predicted": 7.0
+    },
+    {
+      "actual": 13,
+      "predicted": 12.7
+    },
+    {
+      "actual": 20,
+      "predicted": 20.5
+    },
+    {
+      "actual": 12,
+      "predicted": 14.3
+    },
+    {
+      "actual": 17,
+      "predicted": 18.9
+    },
+    {
+      "actual": 23,
+      "predicted": 23.0
+    },
+    {
+      "actual": 11,
+      "predicted": 12.0
+    },
+    {
+      "actual": 19,
+      "predicted": 16.4
+    },
+    {
+      "actual": 12,
+      "predicted": 13.6
+    },
+    {
+      "actual": 18,
+      "predicted": 16.6
+    },
+    {
+      "actual": 15,
+      "predicted": 16.5
+    },
+    {
+      "actual": 12,
+      "predicted": 11.6
+    },
+    {
+      "actual": 12,
+      "predicted": 11.6
+    },
+    {
+      "actual": 15,
+      "predicted": 17.9
+    },
+    {
+      "actual": 13,
+      "predicted": 14.3
+    },
+    {
+      "actual": 17,
+      "predicted": 17.0
+    },
+    {
+      "actual": 16,
+      "predicted": 14.8
+    },
+    {
+      "actual": 18,
+      "predicted": 15.7
+    },
+    {
+      "actual": 18,
+      "predicted": 19.1
+    },
+    {
+      "actual": 12,
+      "predicted": 9.8
+    },
+    {
+      "actual": 12,
+      "predicted": 11.6
+    },
+    {
+      "actual": 15,
+      "predicted": 13.9
+    },
+    {
+      "actual": 12,
+      "predicted": 14.9
+    },
+    {
+      "actual": 6,
+      "predicted": 9.4
+    },
+    {
+      "actual": 15,
+      "predicted": 17.7
+    },
+    {
+      "actual": 17,
+      "predicted": 15.2
+    },
+    {
+      "actual": 15,
+      "predicted": 15.7
+    },
+    {
+      "actual": 18,
+      "predicted": 18.0
+    },
+    {
+      "actual": 18,
+      "predicted": 18.2
+    },
+    {
+      "actual": 18,
+      "predicted": 17.7
+    },
+    {
+      "actual": 13,
+      "predicted": 12.1
+    },
+    {
+      "actual": 10,
+      "predicted": 12.1
+    },
+    {
+      "actual": 15,
+      "predicted": 14.6
+    },
+    {
+      "actual": 7,
+      "predicted": 6.0
+    },
+    {
+      "actual": 19,
+      "predicted": 20.2
+    },
+    {
+      "actual": 13,
+      "predicted": 11.8
+    },
+    {
+      "actual": 19,
+      "predicted": 15.6
+    },
+    {
+      "actual": 11,
+      "predicted": 12.0
+    },
+    {
+      "actual": 15,
+      "predicted": 12.2
+    },
+    {
+      "actual": 12,
+      "predicted": 13.2
+    },
+    {
+      "actual": 15,
+      "predicted": 14.5
+    },
+    {
+      "actual": 5,
+      "predicted": 7.7
+    },
+    {
+      "actual": 15,
+      "predicted": 16.7
+    },
+    {
+      "actual": 20,
+      "predicted": 17.7
+    },
+    {
+      "actual": 17,
+      "predicted": 17.5
+    },
+    {
+      "actual": 15,
+      "predicted": 14.5
+    },
+    {
+      "actual": 15,
+      "predicted": 15.5
+    },
+    {
+      "actual": 18,
+      "predicted": 19.2
+    },
+    {
+      "actual": 11,
+      "predicted": 9.4
+    },
+    {
+      "actual": 16,
+      "predicted": 15.4
+    },
+    {
+      "actual": 7,
+      "predicted": 7.1
+    },
+    {
+      "actual": 15,
+      "predicted": 15.9
+    },
+    {
+      "actual": 14,
+      "predicted": 12.0
+    },
+    {
+      "actual": 13,
+      "predicted": 12.3
+    },
+    {
+      "actual": 18,
+      "predicted": 17.3
+    },
+    {
+      "actual": 11,
+      "predicted": 12.5
+    },
+    {
+      "actual": 14,
+      "predicted": 14.4
+    },
+    {
+      "actual": 20,
+      "predicted": 18.5
+    },
+    {
+      "actual": 11,
+      "predicted": 10.2
+    },
+    {
+      "actual": 26,
+      "predicted": 22.4
+    },
+    {
+      "actual": 22,
+      "predicted": 23.6
+    },
+    {
+      "actual": 20,
+      "predicted": 18.3
+    },
+    {
+      "actual": 10,
+      "predicted": 7.2
+    },
+    {
+      "actual": 19,
+      "predicted": 19.9
+    },
+    {
+      "actual": 4,
+      "predicted": 5.5
+    },
+    {
+      "actual": 18,
+      "predicted": 20.4
+    },
+    {
+      "actual": 7,
+      "predicted": 10.8
+    },
+    {
+      "actual": 17,
+      "predicted": 14.8
+    },
+    {
+      "actual": 14,
+      "predicted": 14.9
+    },
+    {
+      "actual": 17,
+      "predicted": 18.5
+    },
+    {
+      "actual": 19,
+      "predicted": 20.1
+    },
+    {
+      "actual": 12,
+      "predicted": 10.0
+    },
+    {
+      "actual": 6,
+      "predicted": 7.2
+    },
+    {
+      "actual": 15,
+      "predicted": 15.7
+    },
+    {
+      "actual": 7,
+      "predicted": 8.1
+    },
+    {
+      "actual": 12,
+      "predicted": 11.9
+    },
+    {
+      "actual": 9,
+      "predicted": 10.2
+    },
+    {
+      "actual": 11,
+      "predicted": 9.7
+    },
+    {
+      "actual": 22,
+      "predicted": 23.4
+    },
+    {
+      "actual": 11,
+      "predicted": 14.1
+    },
+    {
+      "actual": 15,
+      "predicted": 14.3
+    },
+    {
+      "actual": 17,
+      "predicted": 16.3
+    },
+    {
+      "actual": 19,
+      "predicted": 18.3
+    },
+    {
+      "actual": 13,
+      "predicted": 12.4
+    },
+    {
+      "actual": 10,
+      "predicted": 9.7
+    },
+    {
+      "actual": 17,
+      "predicted": 17.3
+    },
+    {
+      "actual": 19,
+      "predicted": 15.2
+    },
+    {
+      "actual": 8,
+      "predicted": 8.4
+    },
+    {
+      "actual": 12,
+      "predicted": 13.6
+    },
+    {
+      "actual": 19,
+      "predicted": 19.5
+    }
+  ],
+  "gridcv_best_params": {
+    "learning_rate": 0.05,
+    "max_depth": 3,
+    "n_estimators": 200
+  },
+  "train_size": 4000,
+  "test_size": 1000
+}

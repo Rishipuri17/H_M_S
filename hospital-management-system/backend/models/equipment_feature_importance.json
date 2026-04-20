@@ -1,0 +1,41 @@
+{
+  "features": [
+    {
+      "feature": "Days Since Maint.",
+      "importance": 0.2678
+    },
+    {
+      "feature": "Runtime (hrs)",
+      "importance": 0.2664
+    },
+    {
+      "feature": "Error Count",
+      "importance": 0.2587
+    },
+    {
+      "feature": "Vibration (Hz)",
+      "importance": 0.1439
+    },
+    {
+      "feature": "Temperature (\u00b0C)",
+      "importance": 0.059
+    },
+    {
+      "feature": "Usage Cycles",
+      "importance": 0.0035
+    },
+    {
+      "feature": "Equipment Type",
+      "importance": 0.0007
+    }
+  ],
+  "feature_keys": [
+    "equipment_type_enc",
+    "runtime_hours",
+    "days_since_maintenance",
+    "temperature_reading",
+    "vibration_level",
+    "usage_cycles",
+    "last_error_count"
+  ]
+}
