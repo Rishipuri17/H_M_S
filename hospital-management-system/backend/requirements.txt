@@ -15,3 +15,9 @@ scikit-image
 xgboost
 prophet
 statsmodels
+python-multipart
+grad-cam
+torchvision
+shap
+python-jose
+slowapi

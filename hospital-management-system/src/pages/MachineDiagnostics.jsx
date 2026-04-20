@@ -216,7 +216,12 @@ function ImageAnomalySection({ onRetry }) {
         try {
             const form = new FormData()
             form.append('file', file)
-            const res = await fetch(`${API}/api/predict/maintenance`, { method: 'POST', body: form })
+            const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+            const res = await fetch(`${API}/api/predict/analyze-xray`, { 
+                method: 'POST', 
+                headers: { 'Authorization': `Bearer ${jwtToken}` },
+                body: form 
+            })
             const data = await res.json()
             if (data.error) throw new Error(data.error)
             setResult(data)
@@ -346,8 +351,13 @@ function MRIMachineSection({ onRetry }) {
     const handleSubmit = async () => {
         setLoading(true); setError('')
         try {
+            const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
             const res = await fetch(`${API}/api/predict/mri-machine`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST', 
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                },
                 body: JSON.stringify(vals)
             })
             const data = await res.json()
@@ -438,8 +448,13 @@ function XRayMachineSection({ onRetry }) {
     const handleSubmit = async () => {
         setLoading(true); setError('')
         try {
+            const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
             const res = await fetch(`${API}/api/predict/xray-machine`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST', 
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                },
                 body: JSON.stringify(vals)
             })
             const data = await res.json()

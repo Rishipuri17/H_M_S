@@ -190,7 +190,8 @@ function LengthOfStayCard() {
   const handlePredict = async () => {
     setLoading(true); setError(''); setResult(null)
     try {
-      const res  = await fetch(`${API}/patient-stay`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputData) })
+      const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const res  = await fetch(`${API}/patient-stay`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` }, body: JSON.stringify(inputData) })
       const data = await res.json()
       if (!res.ok) throw new Error(data.detail || 'Server error')
       setResult(data)
@@ -254,7 +255,8 @@ function EquipmentFailureCard() {
   const handlePredict = async () => {
     setLoading(true); setError(''); setResult(null)
     try {
-      const res  = await fetch(`${API}/equipment-failure`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(inputData) })
+      const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const res  = await fetch(`${API}/equipment-failure`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` }, body: JSON.stringify(inputData) })
       const data = await res.json()
       if (!res.ok) throw new Error(data.detail || 'Server error')
       setResult(data)
@@ -323,7 +325,8 @@ function MedicineForecastingCard() {
   const handlePredict = async () => {
     setLoading(true); setError(''); setResult(null)
     try {
-      const res  = await fetch(`${API}/medicine-demand`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ medicine_name: medicineName, forecast_days: +forecastDays }) })
+      const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const res  = await fetch(`${API}/medicine-demand`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` }, body: JSON.stringify({ medicine_name: medicineName, forecast_days: +forecastDays }) })
       const data = await res.json()
       if (!res.ok) throw new Error(data.detail || 'Server error')
       setResult(data)
@@ -386,7 +389,8 @@ function PatientArrivalsCard() {
   const handlePredict = async () => {
     setLoading(true); setError(''); setResult(null)
     try {
-      const res  = await fetch(`${API}/patient-arrivals`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ forecast_date: forecastDate, include_weather_factor: badWeather }) })
+      const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const res  = await fetch(`${API}/patient-arrivals`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` }, body: JSON.stringify({ forecast_date: forecastDate, include_weather_factor: badWeather }) })
       const data = await res.json()
       if (!res.ok) throw new Error(data.detail || 'Server error')
       setResult(data)

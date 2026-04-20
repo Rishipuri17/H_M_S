@@ -4,17 +4,38 @@ import os
 from dotenv import load_dotenv
 
 # Import our new modular routers
-from routers import image_anomaly, machine_anomaly, hospital_predictions, patient
-from services.ml_models import get_vision_model, mri_machine_model, xray_machine_model
+from routers import image_anomaly, machine_anomaly, hospital_predictions, patient, explain, metrics
+
+try:
+    from middleware.auth import verify_jwt
+except ImportError:
+    verify_jwt = None
+
+try:
+    from limiter import limiter
+    from slowapi.middleware import SlowAPIMiddleware
+    from slowapi.errors import RateLimitExceeded
+    from slowapi import _rate_limit_exceeded_handler
+except ImportError:
+    limiter = None
 
 # Load environment variables
 load_dotenv()
 
 app = FastAPI(title="Hospital Management System - ML Backend", version="1.0.0")
 
-# Configure CORS so the React frontend can communicate with this API
-origins = ["*"]
+# Setup Rate Limiting
+if limiter:
+    app.state.limiter = limiter
+    app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+    app.add_middleware(SlowAPIMiddleware)
 
+# Setup JWT Authentication Middleware
+if verify_jwt:
+    app.middleware("http")(verify_jwt)
+
+# Configure CORS
+origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -23,26 +44,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ══════════════════════════════════════════════════════════════════════════════
-# ENDPOINTS
-# ══════════════════════════════════════════════════════════════════════════════
-
 # Register modular routers
 app.include_router(image_anomaly.router, prefix="/api/predict", tags=["Medical Imaging"])
 app.include_router(machine_anomaly.router, prefix="/api/predict", tags=["Machine Diagnostics"])
 app.include_router(hospital_predictions.router, prefix="/api/predict", tags=["AI Brain Insights"])
 app.include_router(patient.router, prefix="/api/predict", tags=["Patient Predictions"])
-
+app.include_router(explain.router, prefix="/explain", tags=["XAI"])
+app.include_router(metrics.router, prefix="/metrics", tags=["Metrics"])
 
 @app.get("/health")
 def health_check():
-    # To check vision model without actually loading it yet, we check the _vision_loaded flag
-    from services.ml_models import _vision_model, _vision_loaded
-    return {
-        "status": "ok",
-        "models": {
-            "vision_autoencoder": _vision_model is not None or not _vision_loaded,
-            "mri_machine": mri_machine_model is not None,
-            "xray_machine": xray_machine_model is not None,
-        }
-    }
+    return {"status": "ok", "message": "Backend is active. JWT verification is enforced on non-public routes."}

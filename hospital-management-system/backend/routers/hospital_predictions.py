@@ -85,10 +85,21 @@ class LOSRequest(BaseModel):
 
 class EquipmentRequest(BaseModel):
     equipment_id:           str   = Field(..., description="Equipment identifier (e.g. MRI-01)")
-    runtime_hours:          int   = Field(..., ge=0, le=100_000)
-    days_since_maintenance: int   = Field(..., ge=0, le=365)
-    temperature_reading:    float = Field(..., ge=-10.0, le=200.0)
-    vibration_level:        float = Field(..., ge=0.0, le=20.0)
+    mfcc_mean_1:            float = Field(...)
+    mfcc_mean_2:            float = Field(...)
+    mfcc_mean_3:            float = Field(...)
+    mfcc_mean_4:            float = Field(...)
+    mfcc_mean_5:            float = Field(...)
+    mfcc_mean_6:            float = Field(...)
+    mfcc_mean_7:            float = Field(...)
+    mfcc_mean_8:            float = Field(...)
+    mfcc_mean_9:            float = Field(...)
+    mfcc_mean_10:           float = Field(...)
+    mfcc_mean_11:           float = Field(...)
+    mfcc_mean_12:           float = Field(...)
+    mfcc_mean_13:           float = Field(...)
+    rms_mean:               float = Field(...)
+    zcr_mean:               float = Field(...)
 
 
 class DemandRequest(BaseModel):
@@ -172,7 +183,7 @@ def predict_patient_stay(data: LOSRequest):
 # ── Equipment Failure ─────────────────────────────────────────────────────────
 @router.post("/equipment-failure")
 def predict_equipment_failure(data: EquipmentRequest):
-    """Predict probability of equipment failure in next 14 days."""
+    """Predict probability of equipment failure in next 14 days using MIMII Acoustic Sensor Data."""
     if not equipment_model_artifact:
         raise HTTPException(status_code=503, detail="Equipment Model not loaded. Run training/equipment_failure_train.py first.")
 
@@ -180,13 +191,21 @@ def predict_equipment_failure(data: EquipmentRequest):
         model = equipment_model_artifact["model"]
 
         features = pd.DataFrame([{
-            "equipment_type_enc":      0,
-            "runtime_hours":           data.runtime_hours,
-            "days_since_maintenance":  data.days_since_maintenance,
-            "temperature_reading":     data.temperature_reading,
-            "vibration_level":         data.vibration_level,
-            "usage_cycles":            data.runtime_hours / 10.0,
-            "last_error_count":        0,
+            "mfcc_mean_1": data.mfcc_mean_1,
+            "mfcc_mean_2": data.mfcc_mean_2,
+            "mfcc_mean_3": data.mfcc_mean_3,
+            "mfcc_mean_4": data.mfcc_mean_4,
+            "mfcc_mean_5": data.mfcc_mean_5,
+            "mfcc_mean_6": data.mfcc_mean_6,
+            "mfcc_mean_7": data.mfcc_mean_7,
+            "mfcc_mean_8": data.mfcc_mean_8,
+            "mfcc_mean_9": data.mfcc_mean_9,
+            "mfcc_mean_10": data.mfcc_mean_10,
+            "mfcc_mean_11": data.mfcc_mean_11,
+            "mfcc_mean_12": data.mfcc_mean_12,
+            "mfcc_mean_13": data.mfcc_mean_13,
+            "rms_mean": data.rms_mean,
+            "zcr_mean": data.zcr_mean
         }])
 
         prob     = float(model.predict_proba(features)[0][1])
@@ -198,12 +217,14 @@ def predict_equipment_failure(data: EquipmentRequest):
         days_left = int((1.0 - prob) * 14) if prob > 0.5 else int((1.0 - prob) * 60)
 
         explain_input = {
-            "equipment_type_enc": 0, "runtime_hours": data.runtime_hours,
-            "days_since_maintenance": data.days_since_maintenance,
-            "temperature_reading": data.temperature_reading,
-            "vibration_level": data.vibration_level,
-            "usage_cycles": data.runtime_hours / 10.0,
-            "last_error_count": 0,
+            "mfcc_mean_1": data.mfcc_mean_1, "mfcc_mean_2": data.mfcc_mean_2,
+            "mfcc_mean_3": data.mfcc_mean_3, "mfcc_mean_4": data.mfcc_mean_4,
+            "mfcc_mean_5": data.mfcc_mean_5, "mfcc_mean_6": data.mfcc_mean_6,
+            "mfcc_mean_7": data.mfcc_mean_7, "mfcc_mean_8": data.mfcc_mean_8,
+            "mfcc_mean_9": data.mfcc_mean_9, "mfcc_mean_10": data.mfcc_mean_10,
+            "mfcc_mean_11": data.mfcc_mean_11, "mfcc_mean_12": data.mfcc_mean_12,
+            "mfcc_mean_13": data.mfcc_mean_13, "rms_mean": data.rms_mean,
+            "zcr_mean": data.zcr_mean
         }
         explanation = explain_equipment(explain_input)
 

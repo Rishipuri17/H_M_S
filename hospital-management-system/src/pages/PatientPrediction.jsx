@@ -32,7 +32,10 @@ const PatientPrediction = () => {
     try {
       setForecastLoading(true);
       const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-      const res = await fetch(`${API_URL}/api/predict/patient/forecast?days=7`);
+      const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const res = await fetch(`${API_URL}/api/predict/patient/forecast?days=7`, {
+        headers: { 'Authorization': `Bearer ${jwtToken}` }
+      });
       if (!res.ok) throw new Error('Failed to fetch forecast');
       const data = await res.json();
       
@@ -79,15 +82,16 @@ const PatientPrediction = () => {
     setPredictionResults(null);
 
     try {
-      const [losRes, readmissionRes] = await Promise.all([
+        const jwtToken = import.meta.env.VITE_SUPABASE_ANON_KEY;
+        const [losRes, readmissionRes] = await Promise.all([
         fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/predict/patient/los`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` },
           body: JSON.stringify(formData)
         }),
         fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/predict/patient/readmission`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwtToken}` },
           body: JSON.stringify(formData)
         })
       ]);
