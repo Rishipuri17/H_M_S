@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Brain, Zap, Upload, Activity, AlertTriangle, CheckCircle, Loader, ChevronRight, Info, Wifi, WifiOff } from 'lucide-react'
 
 // ─── API base ─────────────────────────────────────────────────────────────────
-const API = 'http://127.0.0.1:8000'
+const API = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 // ─── Friendly error helper ────────────────────────────────────────────────────
 function friendlyError(e) {

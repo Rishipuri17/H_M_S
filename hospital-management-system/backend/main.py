@@ -13,14 +13,7 @@ load_dotenv()
 app = FastAPI(title="Hospital Management System - ML Backend", version="1.0.0")
 
 # Configure CORS so the React frontend can communicate with this API
-origins = [
-    f"http://localhost:{port}" for port in range(5173, 5185)
-] + [
-    f"http://127.0.0.1:{port}" for port in range(5173, 5185)
-] + [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,

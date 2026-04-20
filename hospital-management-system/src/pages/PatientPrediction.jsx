@@ -31,7 +31,8 @@ const PatientPrediction = () => {
   const fetchForecast = async () => {
     try {
       setForecastLoading(true);
-      const res = await fetch('http://127.0.0.1:8000/api/predict/patient/forecast?days=7');
+      const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${API_URL}/api/predict/patient/forecast?days=7`);
       if (!res.ok) throw new Error('Failed to fetch forecast');
       const data = await res.json();
       
@@ -79,12 +80,12 @@ const PatientPrediction = () => {
 
     try {
       const [losRes, readmissionRes] = await Promise.all([
-        fetch('http://127.0.0.1:8000/api/predict/patient/los', {
+        fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/predict/patient/los`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         }),
-        fetch('http://127.0.0.1:8000/api/predict/patient/readmission', {
+        fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/predict/patient/readmission`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)

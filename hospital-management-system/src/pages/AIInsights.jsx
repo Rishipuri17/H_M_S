@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { Brain, Activity, Package, Users, Loader, AlertCircle, ChevronDown, ChevronRight, Download, Save, CheckCircle } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, BarChart, Bar, Cell } from 'recharts'
 
-const API = 'http://127.0.0.1:8000/api/predict'
+const API = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/predict` : 'http://127.0.0.1:8000/api/predict';
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 const RISK_COLORS = {

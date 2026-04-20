@@ -42,27 +42,27 @@ def get_vision_model():
         )
         model.eval()
         _vision_model = model
-        print("✅ Vision model loaded (lazy)")
+        print("OK Vision model loaded (lazy)")
     except Exception as e:
-        print(f"⚠️  Vision model load failed: {e}")
+        print(f"WARN  Vision model load failed: {e}")
         _vision_model = None
     return _vision_model, _vision_device
 
 # ─── 2. MRI Machine Isolation Forest (fast pkl — load eagerly) ────────────────
 try:
     mri_machine_model = joblib.load(os.path.join(MODEL_DIR, "mri_anomaly_model.pkl"))
-    print("✅ Loaded MRI Machine Anomaly Model")
+    print("OK Loaded MRI Machine Anomaly Model")
 except Exception as e:
     mri_machine_model = None
-    print(f"⚠️  Could not load MRI Machine Model: {e}")
+    print(f"WARN Could not load MRI Machine Model: {e}")
 
 # ─── 3. X-Ray Machine Isolation Forest (fast pkl — load eagerly) ──────────────
 try:
     xray_machine_model = joblib.load(os.path.join(MODEL_DIR, "xray_anomaly_model.pkl"))
-    print("✅ Loaded X-Ray Machine Anomaly Model")
+    print("OK Loaded X-Ray Machine Anomaly Model")
 except Exception as e:
     xray_machine_model = None
-    print(f"⚠️  Could not load X-Ray Machine Model: {e}")
+    print(f"WARN Could not load X-Ray Machine Model: {e}")
 
 # ─── 4. Tumor Classification Pipeline (Lazy-loaded via Transformers) ─────────
 _tumor_classifier = None
@@ -84,8 +84,8 @@ def get_tumor_classifier():
             model="Hemgg/brain-tumor-classification", 
             device=device
         )
-        print("✅ Tumor Classifier pipeline loaded (lazy)")
+        print("OK Tumor Classifier pipeline loaded (lazy)")
     except Exception as e:
-        print(f"⚠️  Tumor classifier pipeline load failed: {e}")
+        print(f"WARN Tumor classifier pipeline load failed: {e}")
         _tumor_classifier = None
     return _tumor_classifier

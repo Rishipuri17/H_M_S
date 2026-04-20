@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import { BarChart2, Activity, TrendingUp, Cpu, Download, RefreshCw, AlertTriangle, CheckCircle } from 'lucide-react';
 
-const API = 'http://127.0.0.1:8000/api/predict';
+const API = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/predict` : 'http://127.0.0.1:8000/api/predict';
 
 // ── Colour palette ─────────────────────────────────────────────────────────────
 const COLORS    = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#8b5cf6'];
