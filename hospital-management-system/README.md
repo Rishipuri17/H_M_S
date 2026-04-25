@@ -1,88 +1,155 @@
 # 🏥 AI-Powered Hospital Management System (HMS)
 
-A production-ready, full-stack Hospital Management System designed to modernize healthcare administration. This project eliminates manual record-keeping by providing a dynamic interface for patient tracking, inventory management, and hospital operations while integrating **cutting-edge Machine Learning** for predictive analytics, resource forecasting, and medical image anomaly detection.
+[![React](https://img.shields.io/badge/Frontend-React%2018-blue?logo=react)](https://reactjs.org/)
+[![FastAPI](https://img.shields.io/badge/AI_Backend-FastAPI-green?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Supabase](https://img.shields.io/badge/Database-Supabase-3ecf8e?logo=supabase)](https://supabase.com/)
+[![Vite](https://img.shields.io/badge/Build_Tool-Vite-646CFF?logo=vite)](https://vitejs.dev/)
+[![ML](https://img.shields.io/badge/AI/ML-XGBoost%20|%20Prophet%20|%20SHAP-orange)](https://xgboost.ai/)
 
-## 🌟 The Novelty: AI & Machine Learning Intersections
-Unlike traditional CRUD hospital systems, this platform employs a microservice AI backend seamlessly integrated into the frontend dashboard:
-
-1. **Medical Image Anomaly Detection (Computer Vision)**
-   - **X-Ray & MRI Scans**: Staff can upload scans. The backend utilizes custom-trained Autoencoder models to highlight structural anomalies (e.g., tumors, fractures) and returns a visual heatmap showing exactly where the anomaly was detected.
-
-2. **Machine Diagnostics & Predictive Maintenance**
-   - **Remaining Useful Life (RUL)**: Using XGBoost models trained on NASA turbofan engine sensor data (adapted for hospital machinery like MRI/CT scanners), the system predicts exactly when a machine is likely to fail, allowing for proactive maintenance.
-
-3. **Hospital Forecasting & AI Insights**
-   - **Patient Arrival Forecasting**: Utilizing Facebook's Prophet (Time-Series Forecasting) to predict peak patient volumes on a 30-day horizon.
-   - **Length of Stay (LoS)**: Predicts how many days a newly admitted patient will occupy a bed based on age, gender, and condition.
-   - **Medicine & Inventory Demand**: Forecasts medication depletion rates to automate restocking.
+A production-grade, full-stack Hospital Management System designed to modernize healthcare administration. This project evolves traditional management tools into a **Production-Grade, AI-Powered Healthcare Ecosystem**, combining robust hospital operations with advanced predictive analytics, anomaly detection, and **Explainable AI (XAI)**.
 
 ---
 
-## 🏗️ Architecture & Cloud Infrastructure
-The project is decoupled into a serverless frontend and a heavy compute backend, connected via REST APIs and a cloud database.
+## 🌟 The "Goated" Evolution: AI & ML Intersections
 
-### 1. Frontend (Deployed on Vercel)
-- **Framework**: React 18, Vite
-- **Styling**: Vanilla CSS (Modern Glassmorphism, Google Antigravity UI)
-- **Data Viz**: Recharts (for ML plotting), Chart.js
-- **Responsibilities**: Handles all user interactions, RBAC (Role-Based Access Control) authentication, and displays dynamic dashboards.
+Unlike traditional CRUD hospital systems, this platform employs a microservice AI backend seamlessly integrated into a professional dashboard.
 
-### 2. Backend / AI Microservice (Deployed on Hugging Face Spaces)
-- **Framework**: FastAPI (Python 3.10)
-- **Environment**: Custom Docker container (`docker.io/library/python:3.10-slim`)
-- **Libraries**: `PyTorch`, `Scikit-Learn`, `XGBoost`, `Prophet`, `opencv-python-headless`
-- **Responsibilities**: Houses the massive `.pkl` and `.pth` mathematical models. Receives HTTPS requests from Vercel, processes arrays/images, and returns JSON predictions.
+### 🧠 The AI Brain Features
+The system features a dedicated **FastAPI ML Backend** powering several critical predictive modules:
 
-### 3. Database (Hosted on Supabase)
-- **Database**: PostgreSQL
-- **Schema**: 
-  - `users`: Stores Admin, Staff, and Viewer RBAC roles.
-  - `patients`: Demographics, admission details, AI-predicted stay lengths.
-  - `rooms`: Bed capacity, ICU availability.
-  - `equipment`: Serial numbers, active status.
-  - `maintenance_records`: Logs of repairs and AI-predicted failure thresholds.
-  - `inventory`: Medicine trackers with min/max stock levels.
+1.  **📊 Patient Length of Stay (LOS)**: Uses XGBoost to predict discharge dates, identifying high-risk patients for better resource planning.
+2.  **🔊 Acoustic Equipment Failure**: Analyzes sensor data (MFCCs) to predict machine failures before they happen, moving from reactive to proactive maintenance.
+3.  **📈 Medicine Demand Forecasting**: Utilizes **Facebook Prophet** to predict pharmaceutical inventory needs 30-90 days in advance.
+4.  **🌊 Patient Arrival Surge**: Forecasts daily patient inflows using **SARIMAX** models, including weather-factor adjustments for emergency preparedness.
+5.  **🔍 Explainable AI (XAI)**: Every prediction includes a "Why?" panel powered by **SHAP**, showing exactly which features (age, symptoms, runtime) influenced the AI's decision.
+6.  **🔄 Self-Improving Feedback Loop**: Stores prediction results in Supabase to facilitate future model retraining and accuracy improvement.
 
 ---
 
-## 🔒 Future Roadmap (Security Novelty)
-To elevate the project to an enterprise standard, the following **Zero-Trust Military-Grade Security Architecture** is currently under development:
+## 🛠️ Technology Stack
 
-1. **End-to-End Encryption (E2EE)**: The React app uses `crypto-js` to AES-256 encrypt patient data before `fetch()` is called. The Hugging Face backend decrypts the payload in-memory, processes the ML prediction, and encrypts the response, ensuring true HIPAA compliance for data-in-transit.
-2. **Strict JWT Gateway**: Standardizing full Supabase JSON Web Token verification on the FastAPI endpoints so unauthorized external queries to the Hugging Face space are rejected.
-3. **SlowAPI Rate Limiting**: Preventing DDoS attacks on the computationally heavy ML endpoints.
+### **Frontend**
+- **React 18** with **Vite** for blazing fast performance.
+- **Recharts** & **Chart.js** for interactive medical telemetry and ML metrics.
+- **Lucide Icons** for a modern, clean aesthetic.
+- **Vanilla CSS** with a custom design system (Glassmorphism, High-contrast accessibility).
+
+### **AI & ML Microservice**
+- **FastAPI** (Python 3.10) for high-performance ML inference.
+- **Libraries**: `XGBoost`, `Scikit-learn`, `Facebook Prophet`, `Statsmodels`, `SHAP`.
+- **Image AI**: `PyTorch` & `torchvision` (Autoencoders for anomaly detection).
+- **Security**: **SlowAPI** for rate limiting and **Jose** for JWT verification.
+
+### **Backend & Infrastructure**
+- **Supabase (PostgreSQL)**: Handles relational data with **Row Level Security (RLS)**.
+- **JWT (JSON Web Tokens)**: Secure Role-Based Access Control (RBAC).
+- **Docker**: Containerized deployment for consistent environments.
 
 ---
 
-## 📂 Repository Structure
+## 📂 Project Architecture
 
-```text
+```bash
 hospital-management-system/
+├── 📂 backend/                   # 🧠 AI BRAIN - FASTAPI
+│   ├── 📂 routers/               # ML Prediction Endpoints (LOS, Demand, XAI)
+│   ├── 📂 models/                # Trained .pkl & .pth model artifacts
+│   ├── 📂 training/              # ML training scripts and notebooks
+│   ├── main.py                   # FastAPI entry point
+│   └── requirements.txt          # Python ML dependencies
 │
-├── src/                      # React Frontend (Vite)
-│   ├── components/           # UI Components (Charts, Tables, Auth Wrappers)
-│   ├── context/              # AuthContext (Session Management)
-│   ├── lib/                  # Services (supabase.js client)
-│   └── pages/                # Application routes (Dashboards, AI Insights, Login)
+├── 📂 src/                       # 🎨 FRONTEND - REACT
+│   ├── 📂 pages/                 # Admin, Staff, AI Insights, ML Metrics
+│   ├── 📂 components/            # UI Components (Charts, Tables, Modals)
+│   ├── 📂 lib/                   # Supabase client & API services
+│   └── 📂 context/               # AuthContext for session management
 │
-├── backend/                  # Python FastAPI Microservice (Hugging Face)
-│   ├── main.py               # API Entry point & CORS configuration
-│   ├── routers/              # Modular Endpoints (image_anomaly.py, patient.py)
-│   ├── services/             # ML inference execution scripts
-│   ├── models/               # Ignored by git; contains large AI binary models
-│   ├── Dockerfile            # Hugging Face deployment instructions
-│   └── requirements.txt      # Python dependencies (fastapi, uvicorn, prophet, python-multipart)
-│
-├── .env                      # Environment Variables (Vercel & Local)
-└── package.json              # NPM dependencies
+├── 📄 supabase-schema.sql        # Database definitions & RLS policies
+├── 📄 Dockerfile                 # Root containerization
+└── 📄 .env                       # Environment secrets
 ```
 
-## 🚀 Environment Variables setup
-To run this project, the following variables must be present in the Frontend's `.env` (or Vercel Dashboard):
-```env
-VITE_SUPABASE_URL=YOUR_SUPABASE_PROJECT_URL
-VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
-VITE_API_URL=https://your-hugging-face-space-url.hf.space
-```
+---
 
-*Built to streamline healthcare administration while leveraging advanced mathematical modeling for proactive, data-driven decisions.*
+## 📋 Core Modules
+
+### 1. Advanced Dashboards
+- **Admin Dashboard**: Full CRUD over Users, Rooms, Patients, Equipment, and Inventory. Features a dedicated **Audit Log**.
+- **Staff Dashboard**: Optimized for daily hospital operations and patient care tracking.
+- **AI Brain Insights**: Unified panel for all predictive capabilities with PDF report generation.
+
+### 2. Operational Modules
+- **🏥 Room Management**: Status tracking (Available/Occupied/Cleaning), type classification (ICU/General), and floor mapping.
+- **🔧 Equipment & Telemetry**: Predictive maintenance logs, criticality levels, and sensor data integration.
+- **📦 Inventory & Logistics**: Auto-stock status (Low/Out of Stock), pricing, and supplier management.
+- **👥 Patient Care**: Registration, medical history, room assignment, and emergency contact registry.
+
+### 3. Security & RBAC
+| Role | Permissions | Primary Worksurface |
+| :--- | :--- | :--- |
+| **Admin** | Full System Control + CRUD | `AdminDashboard.jsx` |
+| **Staff** | Operational Updates + AI Access | `StaffDashboard.jsx` |
+| **Viewer** | Read-only access + Reports | `Dashboard.jsx` |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js** (v18+)
+- **Python** (3.10+)
+- **Supabase Account** (Free tier works perfectly)
+
+### Quick Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Rishipuri17/H_M_S.git
+   cd hospital-management-system
+   ```
+
+2. **Database Setup:**
+   - Create a new project in **Supabase**.
+   - Copy the contents of `supabase-schema.sql` and run it in the **Supabase SQL Editor**.
+
+3. **Frontend Configuration:**
+   - Create a `.env` file in the root:
+     ```env
+     VITE_SUPABASE_URL=YOUR_SUPABASE_URL
+     VITE_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+     VITE_API_URL=http://localhost:8000 # Local FastAPI
+     ```
+   - Install dependencies and run:
+     ```bash
+     npm install
+     npm run dev
+     ```
+
+4. **Backend Configuration:**
+   - Navigate to the `backend` folder:
+     ```bash
+     cd backend
+     python -m venv venv
+     source venv/bin/activate # or venv\Scripts\activate on Windows
+     pip install -r requirements.txt
+     python main.py
+     ```
+
+### Default Credentials
+- **Admin**: `admin@hospital.com`
+- **Staff**: `staff@hospital.com`
+- **Viewer**: `viewer@hospital.com`
+
+---
+
+## 🎯 Roadmap
+- [ ] **Image AI Integration**: Fully activating X-ray/MRI screening routers.
+- [ ] **Real-time Notifications**: WebSockets for "Critical" equipment failure alerts.
+- [ ] **Dynamic Retraining**: Automated model updates based on the Feedback Loop data.
+
+---
+
+## 📞 License & Contact
+Distributed under the MIT License. Developed as a **Minor Project** by the team to push the boundaries of AI in Healthcare.
+
+**Ready to start?** Check out the [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide! 🎉

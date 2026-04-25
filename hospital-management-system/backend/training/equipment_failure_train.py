@@ -51,8 +51,8 @@ def create_synthetic_data(num_samples: int = 3000) -> pd.DataFrame:
         (vibration_level / 4)              * 0.3 +
         (last_error_count / 10)            * 0.4
     ) + np.random.normal(0, 0.1, num_samples)
-
-    will_fail = (risk_score > 0.65).astype(int)
+    # Increased threshold to 1.05 to simulate realistic rare failure events (~10% failure rate)
+    will_fail = (risk_score > 1.05).astype(int)
 
     return pd.DataFrame({
         "equipment_type":        equipment_type,
