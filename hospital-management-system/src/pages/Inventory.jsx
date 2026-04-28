@@ -16,8 +16,8 @@ const Inventory = () => {
 
   const [formData, setFormData] = useState({
     item_name: '',
-    item_category: 'Medication',
-    item_code: '',
+    category: 'Medication',
+    code: '',
     description: '',
     unit_of_measurement: 'pieces',
     current_stock: 0,
@@ -75,13 +75,35 @@ const Inventory = () => {
   const openModal = (item = null) => {
     if (item) {
       setEditingItem(item)
-      setFormData(item)
+      // Map DB fields to formData if they differ (though we are aligning them now)
+      setFormData({
+        item_name: item.item_name || '',
+        category: item.category || 'Medication',
+        code: item.code || '',
+        description: item.description || '',
+        unit_of_measurement: item.unit_of_measurement || 'pieces',
+        current_stock: item.current_stock || 0,
+        minimum_stock: item.minimum_stock || 0,
+        maximum_stock: item.maximum_stock || 1000,
+        reorder_level: item.reorder_level || 0,
+        unit_price: item.unit_price || '',
+        supplier: item.supplier || '',
+        storage_location: item.storage_location || '',
+        expiry_date: item.expiry_date || '',
+        batch_number: item.batch_number || '',
+        requires_prescription: item.requires_prescription || false,
+        is_controlled_substance: item.is_controlled_substance || false,
+        temperature_sensitive: item.temperature_sensitive || false,
+        storage_temperature_min: item.storage_temperature_min || '',
+        storage_temperature_max: item.storage_temperature_max || '',
+        notes: item.notes || ''
+      })
     } else {
       setEditingItem(null)
       setFormData({
         item_name: '',
-        item_category: 'Medication',
-        item_code: '',
+        category: 'Medication',
+        code: '',
         description: '',
         unit_of_measurement: 'pieces',
         current_stock: 0,
@@ -111,9 +133,9 @@ const Inventory = () => {
 
   const filteredInventory = inventory.filter(item => {
     const matchesSearch = item.item_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.item_code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.supplier?.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = filterCategory === 'all' || item.item_category === filterCategory
+    const matchesCategory = filterCategory === 'all' || item.category === filterCategory
     const matchesLowStock = !showLowStock || item.current_stock <= item.minimum_stock
     return matchesSearch && matchesCategory && matchesLowStock
   })
@@ -209,8 +231,8 @@ const Inventory = () => {
                         {item.item_name}
                       </div>
                     </td>
-                    <td data-label="Category">{item.item_category}</td>
-                    <td style={{ fontSize: '13px', color: '#666' }} data-label="Code">{item.item_code || '-'}</td>
+                    <td data-label="Category">{item.category}</td>
+                    <td style={{ fontSize: '13px', color: '#666' }} data-label="Code">{item.code || '-'}</td>
                     <td style={{ fontWeight: '600' }} data-label="Current Stock">
                       {item.current_stock} {item.unit_of_measurement}
                     </td>
@@ -269,8 +291,8 @@ const Inventory = () => {
                   <label className="form-label">Category *</label>
                   <select
                     className="form-select"
-                    value={formData.item_category}
-                    onChange={(e) => setFormData({ ...formData, item_category: e.target.value })}
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     required
                   >
                     <option value="Medication">Medication</option>
@@ -292,8 +314,8 @@ const Inventory = () => {
                   <input
                     type="text"
                     className="form-input"
-                    value={formData.item_code}
-                    onChange={(e) => setFormData({ ...formData, item_code: e.target.value })}
+                    value={formData.code}
+                    onChange={(e) => setFormData({ ...formData, code: e.target.value })}
                   />
                 </div>
                 <div className="form-group">
